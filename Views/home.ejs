@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Ask Panda - Home</title>
+        <link rel="stylesheet" href="home.css">
+    </head>
+    <body>
+        <%- include('includes/header') %>
+        <div id="home">
+            <div id="flash-errors">
+                <% errors.forEach( function(msg) { %>
+                    <div class="flash-error-msg"> <%= msg %> </div>
+                <% }) %>
+            </div>
+            <div id="main">
+                <div id="main-content">
+                    <h1>Tired of overflowing content from conventional Social media?</h1>
+                    <p>Ask Panda allows users to share content in a clean and concise way with help of easy-to-create posts, Newsfeed and live chat integration.</p>
+                </div>
+                <div id="main-form">
+                    <form action="/register" method="POST" id="frmRegister">
+                        <input type="text" maxlength="10" id="edtregname" name="uname" autocomplete="off" placeholder="Enter Username" />
+                        <input type="text" maxlength="25" id="edtregemail" name="email" autocomplete="off" placeholder="Enter e-mail" />
+                        <input type="password" maxlength="15" id="edtregpswd" name="pswd" autocomplete="off" placeholder="Enter Password" />
+                        <input type="password" maxlength="15" id="edtconfirmpswd" name="rstpswd" autocomplete="off" placeholder="Re-enter Password" />
+                        <button id="btnRegister" type="submit">REGISTER</button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </body>
+</html>

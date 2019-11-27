@@ -1,0 +1,22 @@
+<nav>
+    <img src="askpanda.jpg" alt="ASK PANDA" id="imgLogo">
+
+    <% if (user) { %>
+        
+    <div id="nav-controls-div">
+        <img id="imgGravatar" src="<%= user.gravatar %>" alt="">
+        <form action="/logout" method="POST">
+            <button id="btnLogout" type="submit">Logout</button>
+        </form>
+    </div>        
+
+    <% } else { %>
+
+    <form action="/login" method="POST" id="frmLogin">
+        <input type="text" maxlength="10" id="edtloginname" name="uname" autocomplete="off" placeholder="username" />
+        <input type="password" maxlength="15" id="edtloginpswd" name="pswd" autocomplete="off" placeholder="password" />
+        <button id="btnLogin" type="submit">LOGIN</button>
+    </form>
+
+    <% } %>
+</nav>
