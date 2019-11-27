@@ -88,7 +88,6 @@ User.prototype.login = function() {
 }
 
 User.prototype.getAvatar = function() {
-    console.log(this.data.email)
     this.gravatar = `https://gravatar.com/avatar/${md5(this.data.email)}?s=80`
 }
 

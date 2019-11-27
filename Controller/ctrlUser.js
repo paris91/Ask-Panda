@@ -54,8 +54,6 @@ exports.register = function(req, res) {
 
 exports.logout = function(req, res) {
     req.session.destroy(function() {
-        console.log('redirect logout is called')
-        // res.send({redirect: '/'})
         res.redirect('/')
     })
 }
