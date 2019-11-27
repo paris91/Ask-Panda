@@ -5,8 +5,10 @@
         
     <div id="nav-controls-div">
         <img id="imgGravatar" src="<%= user.gravatar %>" alt="">
-        <form action="/logout" method="POST">
+        <form action="/createPost" method="POST" id="frmCreatePost">            
             <button id="btnCreatePost" type="submit">Create Post</button>
+        </form>
+        <form action="/logout" method="POST" id="frmLogout">            
             <button id="btnLogout" type="submit">Logout</button>
         </form>
     </div>        
