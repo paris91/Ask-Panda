@@ -7,13 +7,13 @@
     </head>
     <body>
         <%- include('includes/header') %>
-        <div id="home">
+        <div id="main" class="vertical-centered-flex">
             <div id="flash-errors">
                 <% errors.forEach( function(msg) { %>
                     <div class="flash-error-msg"> <%= msg %> </div>
                 <% }) %>
             </div>
-            <div id="main">
+            <div id="home" class="horizontal-centered-flex">
                 <div id="main-content">
                     <h1>Tired of overflowing content from conventional Social media?</h1>
                     <p>Ask Panda allows users to share content in a clean and concise way with help of easy-to-create posts, Newsfeed and live chat integration.</p>

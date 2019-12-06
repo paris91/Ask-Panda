@@ -1,0 +1,15 @@
+#frmCreatePost {
+    padding-top: 30px;
+}
+
+#frmCreatePost input,textarea {
+    width: 60vw;
+}
+
+#frmCreatePost textarea {
+    height: 60vh;
+}
+
+#btnSubmit {
+    width: 20vw;
+}

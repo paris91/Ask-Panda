@@ -56,8 +56,9 @@ User.prototype.register = function() {
         if (!this.errors.length) {
             let salt = bcrypt.genSaltSync(10)
             this.data.pswd = bcrypt.hashSync(this.data.pswd, salt)
-            col_users.insertOne(this.data).then(() => {
+            col_users.insertOne(this.data).then((userInfo) => {
                 this.getAvatar()
+                this.data.id = userInfo._id
                 resolve("register success")
             }).catch(() => {
                 reject("register fail")
@@ -75,6 +76,7 @@ User.prototype.login = function() {
         col_users.findOne({uname: this.data.uname}).then((userInfo) => {
             if (userInfo && bcrypt.compareSync(this.data.pswd, userInfo.pswd)) {
                 this.data.email = userInfo.email
+                this.data.id = userInfo._id
                 this.getAvatar()
                 resolve("login success")
             }

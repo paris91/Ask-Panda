@@ -4,14 +4,14 @@
         <title>Ask Panda - <%= user.uname %> NewPost
         </title>
         <link rel="stylesheet" href="header.css">
-        <link rel="stylesheet" href="feed.css">
+        <link rel="stylesheet" href="post.css">
     </head>
     <body>
         <%- include('includes/header') %>
         <div id="main">
-            <form id="frmCreatePost" action="/newPost" method="POST">
+            <form id="frmCreatePost" action="/newPost" method="POST" class="vertical-centered-flex">
                 <input type="text" name="title" id="edtTitle" placeholder="Enter a title" autocomplete="false" maxlength="60">
-                <textarea name="content" id="edtContent" form="frmCreatePost"></textarea>
+                <textarea name="content" id="edtContent" form="frmCreatePost" placeholder="Enter post content"></textarea>
                 <button type="submit" id="btnSubmit">Add</button>
             </form>
         </div>

@@ -3,19 +3,19 @@
 
     <% if (user) { %>
         
-    <div id="nav-controls-div">
+    <div id="nav-controls-div" class="horizontal-centered-flex">
         <img id="imgGravatar" src="<%= user.gravatar %>" alt="">
-        <form action="/createPost" method="POST" id="frmCreatePost">            
+        <form action="/createPost" method="GET" id="btnfrmCreatePost">            
             <button id="btnCreatePost" type="submit">Create Post</button>
         </form>
-        <form action="/logout" method="POST" id="frmLogout">            
+        <form action="/logout" method="POST" id="btnfrmLogout">            
             <button id="btnLogout" type="submit">Logout</button>
         </form>
     </div>        
 
     <% } else { %>
 
-    <form action="/login" method="POST" id="frmLogin">
+    <form action="/login" method="POST" id="frmLogin" class="horizontal-centered-flex">
         <input type="text" maxlength="10" id="edtloginname" name="uname" autocomplete="off" placeholder="username" />
         <input type="password" maxlength="15" id="edtloginpswd" name="pswd" autocomplete="off" placeholder="password" />
         <button id="btnLogin" type="submit">LOGIN</button>

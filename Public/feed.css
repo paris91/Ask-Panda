@@ -1,5 +1,0 @@
-#main {
-    background: var(--home-color, #000000);
-    color: var(--navbar-color, #eeeeee);
-    height: calc(100vh - var(--navbar-height,50px));
-}
