@@ -109,3 +109,17 @@ button {
     height: var(--form-field-height);
     /* box-sizing: content-box; */
 }
+
+#flash-errors {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.flash-error-msg {
+    background: pink;
+    color: black;
+    width: 40vw;
+    margin: 5px;
+}

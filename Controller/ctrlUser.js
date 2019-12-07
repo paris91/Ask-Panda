@@ -12,7 +12,7 @@ exports.home = function(req, res) {
 exports.login = function(req, res) {
     let usr = new User(req.body)
     usr.login().then(function(p) {
-        req.session.user = {uname: usr.data.uname, gravatar: usr.gravatar}
+        req.session.user = {uname: usr.data.uname, gravatar: usr.gravatar, _id: usr.data._id}
         req.session.save(function() {
             // res.send({redirect: '/'})
             res.redirect('/')
@@ -40,7 +40,7 @@ exports.authorizeUser = function(req, res, next) {
 exports.register = function(req, res) {
     let usr = new User(req.body)
     usr.register().then(function(p) {
-        req.session.user = {uname: usr.data.uname, gravatar: usr.gravatar}
+        req.session.user = {uname: usr.data.uname, gravatar: usr.gravatar, _id: usr.data._id}
         req.session.save(function() {
             res.redirect('/')
         })

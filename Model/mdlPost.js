@@ -1,9 +1,10 @@
 const col_posts = require("../db").db().collection("post")
 const sanitizeHTML = require("sanitize-html")
+const ObjectID = require("mongodb").ObjectID
 
 let Post = function(data, usr) {
     this.data = data
-    this.usr = usr
+    this.data.usr = usr
     this.errors = []
 }
 
@@ -14,7 +15,8 @@ Post.prototype.clean = function() {
     this.data = {
         title: sanitizeHTML(this.data.title.trim(), {allowedAttributes: [], allowedTags: []}),
         content: sanitizeHTML(this.data.content.trim(), {allowedAttributes: [], allowedTags: []}),
-        user: this.usr 
+        createdDate: new Date(),
+        author:  ObjectID(this.data.usr)
     }
 }
 
@@ -31,6 +33,7 @@ Post.prototype.validate = function() {
 
 Post.prototype.createPost = function() {
     return new Promise((resolve, reject) => {
+        this.errors = []
         this.clean()
         this.validate()
         if (!this.errors.length) {

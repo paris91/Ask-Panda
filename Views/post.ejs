@@ -8,7 +8,12 @@
     </head>
     <body>
         <%- include('includes/header') %>
-        <div id="main">
+        <div id="main" class="vertical-centered-flex">
+            <div id="flash-errors">
+                <% errors.forEach( function(msg) { %>
+                    <div class="flash-error-msg"> <%= msg %> </div>
+                <% }) %>
+            </div>
             <form id="frmCreatePost" action="/newPost" method="POST" class="vertical-centered-flex">
                 <input type="text" name="title" id="edtTitle" placeholder="Enter a title" autocomplete="false" maxlength="60">
                 <textarea name="content" id="edtContent" form="frmCreatePost" placeholder="Enter post content"></textarea>

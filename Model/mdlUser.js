@@ -52,7 +52,6 @@ User.prototype.register = function() {
         this.errors = []
         this.clean()
         this.validate()
-        console.log(this.errors)
         if (!this.errors.length) {
             let salt = bcrypt.genSaltSync(10)
             this.data.pswd = bcrypt.hashSync(this.data.pswd, salt)
