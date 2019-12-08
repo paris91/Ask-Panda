@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Ask Panda - <%= profile.uname %></title>
+        <link rel="stylesheet" href="/header.css">
+        <link rel="stylesheet" href="/viewprofile.css">
+    </head>
+    <body>
+        <%- include('includes/header') %>
+        <div id="main" class="vertical-centered-flex">
+            <div id="profile-div">
+                <div id="profile-header" class="vertical-centered-flex">
+                    <img src="<%= profile.gravatar %>" alt="<%= profile.uname %>" class="imgGravatar">
+                    <h3><%= profile.uname %></h3>
+                    <a href="mailto:<%= profile.email %>">mailto: <%= profile.email %></a> 
+                </div>                
+                <div id="posts-div">
+                    <% if(profile.posts) { %>
+                        <% if(profile.posts.length > 0) { %>
+                            <% profile.posts.forEach(p => { %>
+                                <div class="post-tile">
+                                    <a href="\post\<%= p._id %>"><h4> <%= p.title %> </h4> </a>
+                                    <h4> <%= p.createdDate.getDate() %> / <%= p.createdDate.getMonth() + 1 %> / <%= p.createdDate.getFullYear() %>  </h4>
+                                </div>
+                            <% }) %>
+                        <% } %>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

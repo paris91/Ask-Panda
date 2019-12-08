@@ -6,7 +6,6 @@ exports.createPost = function(req, res) {
 }
 
 exports.newPost = function(req, res) {
-    console.log(req.session.user)
     let pst = new Post(req.body, req.session.user._id)
     pst.createPost().then(function(p) {
         res.redirect('/')

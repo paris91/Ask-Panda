@@ -1,0 +1,15 @@
+a:link {
+    text-decoration: none;
+    color: var(--navbar-color, #eeeeee)
+}
+
+a {
+    text-decoration: none;
+    color: var(--navbar-color, #eeeeee)
+}
+
+.post-tile {
+    display: grid;
+    grid-template-columns: auto auto;
+    column-gap: 50px;
+}

@@ -3,6 +3,7 @@ const validator = require("validator")
 const sanitizeHTML = require("sanitize-html")
 const bcrypt = require("bcryptjs")
 const md5 = require("md5")
+// const Post = require("./mdlPost")
 
 let User = function(data, fetchAvatar) {
     this.data = data
@@ -94,6 +95,21 @@ User.prototype.login = function() {
 
 User.prototype.getAvatar = function() {
     this.gravatar = `https://gravatar.com/avatar/${md5(this.data.email)}?s=80`
+}
+
+User.findProfileByUname = async function(u) {
+    return new Promise(async function(resolve, reject) {
+        let prf = await col_users.findOne({uname: u})
+        if (prf) {
+            let usr = new User(prf, true)
+            // let psts = await Post.findPostsByAuthor(prf._id)
+            prf = {uname: usr.data.uname, email: usr.data.email, gravatar: usr.gravatar, authorid: usr.data._id}
+            resolve(prf)
+        } else {
+            reject()
+        }
+    })
+
 }
 
 module.exports = User

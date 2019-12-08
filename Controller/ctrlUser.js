@@ -1,4 +1,5 @@
 const User = require('../Model/mdlUser')
+const Post = require('../Model/mdlPost')
 
 exports.home = function(req, res) {
     if (req.session.user) {
@@ -56,4 +57,15 @@ exports.logout = function(req, res) {
     req.session.destroy(function() {
         res.redirect('/')
     })
+}
+
+exports.viewProfile = async function(req, res) {
+    try {
+        let prf = await User.findProfileByUname(req.params.uname)
+        let psts = await Post.findPostsByAuthor(prf.authorid)
+        prf.posts = psts
+        res.render('viewprofile', {profile: prf})
+    } catch {
+        res.render('404')
+    }
 }

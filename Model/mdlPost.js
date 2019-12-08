@@ -6,7 +6,6 @@ const User = require("./mdlUser")
 let Post = function(data, usr) {
     this.data = data
     this.data.usr = usr
-    console.log(usr)
     this.errors = []
 }
 
@@ -38,7 +37,6 @@ Post.prototype.createPost = function() {
         this.errors = []
         this.clean()
         this.validate()
-        console.log(this.data)
         if (!this.errors.length) {
             col_posts.insertOne(this.data).then((postInfo) => {
                 resolve("Post created successfully")
@@ -80,7 +78,7 @@ Post.findPostByID = function(id) {
             }
             return x
         })[0]
-        console.log(pst)
+        
         if (pst) {
             resolve(pst)
         }
@@ -88,6 +86,28 @@ Post.findPostByID = function(id) {
             reject('Unable to find post')
         }
 
+    })
+}
+
+Post.findPostsByAuthor = async function(id) {
+    return new Promise(async function(resolve, reject) {
+        let psts = await col_posts.aggregate([
+            {$match: {author: new ObjectID(id)}},
+            {$project: {
+                _id: 1,
+                title: 1,
+                createdDate: 1
+            }},
+            {$sort: {
+                createdDate: -1
+            }}
+        ]).toArray()
+
+        if(psts) {
+            resolve(psts)
+        } else {
+            reject()
+        }
     })
 }
 

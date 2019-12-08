@@ -4,7 +4,7 @@
     <% if (user) { %>
         
     <div id="nav-controls-div" class="horizontal-centered-flex">
-        <img class="imgGravatar" src="<%= user.gravatar %>" alt="">
+        <a href="/profile/<%= user.uname %>"><img class="imgGravatar" src="<%= user.gravatar %>" alt=""></a>
         <form action="/createPost" method="GET" id="btnfrmCreatePost">            
             <button id="btnCreatePost" type="submit">Create Post</button>
         </form>
