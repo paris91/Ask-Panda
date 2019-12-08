@@ -5,12 +5,12 @@
 
 @font-face {
     font-family: 'Nexa-Light';
-    src: url('Nexa-light.otf') format('opentype')
+    src: url('Nexa-light.otf') format('opentype');
 }
 
 :root {
     --navbar-color: #eeeeee;
-    --home-color: linear-gradient(90deg, #000000, #eeeeee);
+    --home-color: linear-gradient(90deg, #000000, #7e7e7e);
     --navbar-height: 60px;
     --form-field-height: 1.75em;
     --form-font-size: 1.1em;

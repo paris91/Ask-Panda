@@ -16,7 +16,7 @@ Post.prototype.clean = function() {
         title: sanitizeHTML(this.data.title.trim(), {allowedAttributes: [], allowedTags: []}),
         content: sanitizeHTML(this.data.content.trim(), {allowedAttributes: [], allowedTags: []}),
         createdDate: new Date(),
-        author:  ObjectID(this.data.usr)
+        author: new ObjectID(this.data.usr)
     }
 }
 
@@ -46,6 +46,25 @@ Post.prototype.createPost = function() {
         else {
             reject("Post creation failed")
         }
+    })
+}
+
+// NOT A PROTOTYPE
+Post.findPostByID = function(id) {
+    return new Promise(async function(resolve, reject) {
+        if (!((typeof(id) == "string") && (ObjectID.isValid(id)))) {
+            reject('Invalid ID')
+            return
+        }
+
+        let pst = await col_posts.findOne({_id: new ObjectID(id)})
+        if (pst) {
+            resolve(pst)
+        }
+        else {
+            reject('Unable to find post')
+        }
+
     })
 }
 

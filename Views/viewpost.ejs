@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Ask Panda - <%= user.uname %> Dashboard
-        </title>
+        <title>Ask Panda - <%= post.title %></title>
         <link rel="stylesheet" href="/header.css">
-        <link rel="stylesheet" href="/feed.css">
+        <link rel="stylesheet" href="/viewpost.css">
     </head>
     <body>
         <%- include('includes/header') %>
         <div id="main" class="vertical-centered-flex">
-            <h1>Welcome <%= user.uname %></h1>
+            <h1><%= post.title %></h1>
+            <p><%= post.content %></p>
         </div>
     </body>
 </html>

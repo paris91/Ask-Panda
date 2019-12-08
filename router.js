@@ -11,6 +11,7 @@ router.post('/logout', ctrlUser.logout)
 
 router.get('/createPost', ctrlUser.authorizeUser, ctrlPost.createPost)
 router.post('/newPost', ctrlPost.newPost)
+router.get('/post/:id', ctrlPost.viewPost)
 
 
 module.exports = router
