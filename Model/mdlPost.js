@@ -1,10 +1,12 @@
 const col_posts = require("../db").db().collection("post")
 const sanitizeHTML = require("sanitize-html")
 const ObjectID = require("mongodb").ObjectID
+const User = require("./mdlUser")
 
 let Post = function(data, usr) {
     this.data = data
     this.data.usr = usr
+    console.log(usr)
     this.errors = []
 }
 
@@ -36,6 +38,7 @@ Post.prototype.createPost = function() {
         this.errors = []
         this.clean()
         this.validate()
+        console.log(this.data)
         if (!this.errors.length) {
             col_posts.insertOne(this.data).then((postInfo) => {
                 resolve("Post created successfully")
@@ -57,7 +60,27 @@ Post.findPostByID = function(id) {
             return
         }
 
-        let pst = await col_posts.findOne({_id: new ObjectID(id)})
+        // let pst = await col_posts.findOne({_id: new ObjectID(id)})
+        let pst = await col_posts.aggregate([
+            {$match: {_id: new ObjectID(id)}},
+            {$lookup: {from: "users", localField: "author", foreignField: "_id", as: "authorInfo"}},
+            {$unwind: "$authorInfo"},
+            {$project: {
+                title: 1,
+                content: 1,
+                createdDate: 1,
+                authorInfo: 1
+            }}            
+        ]).toArray()
+
+        pst = pst.map(function(x) {
+            x.authorInfo = {
+                uname: x.authorInfo.uname,
+                gravatar: new User(x.authorInfo, true).gravatar
+            }
+            return x
+        })[0]
+        console.log(pst)
         if (pst) {
             resolve(pst)
         }

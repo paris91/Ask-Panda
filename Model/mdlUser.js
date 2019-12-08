@@ -4,9 +4,13 @@ const sanitizeHTML = require("sanitize-html")
 const bcrypt = require("bcryptjs")
 const md5 = require("md5")
 
-let User = function(data) {
+let User = function(data, fetchAvatar) {
     this.data = data
     this.errors = []
+    if (fetchAvatar == undefined) {fetchAvatar = false}
+    if (fetchAvatar) {
+        this.getAvatar()
+    }
 }
 
 User.prototype.clean = function() {
@@ -73,9 +77,9 @@ User.prototype.login = function() {
     return new Promise((resolve, reject) => {
         this.clean()
         col_users.findOne({uname: this.data.uname}).then((userInfo) => {
-            if (userInfo && bcrypt.compareSync(this.data.pswd, userInfo.pswd)) {
+            if (userInfo && bcrypt.compareSync(this.data.pswd, userInfo.pswd)) {                
                 this.data.email = userInfo.email
-                this.data.id = userInfo._id
+                this.data._id = userInfo._id
                 this.getAvatar()
                 resolve("login success")
             }

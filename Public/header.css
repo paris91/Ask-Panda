@@ -67,7 +67,7 @@ nav {
     justify-content: space-evenly;
 }
 
-#imgGravatar {    
+.imgGravatar {    
     /* box-sizing: content-box; */
     margin: 6px;
     border-radius: 50%;

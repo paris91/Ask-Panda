@@ -10,7 +10,7 @@ exports.home = function(req, res) {
 }
 
 exports.login = function(req, res) {
-    let usr = new User(req.body)
+    let usr = new User(req.body, false)
     usr.login().then(function(p) {
         req.session.user = {uname: usr.data.uname, gravatar: usr.gravatar, _id: usr.data._id}
         req.session.save(function() {
@@ -38,7 +38,7 @@ exports.authorizeUser = function(req, res, next) {
 }
 
 exports.register = function(req, res) {
-    let usr = new User(req.body)
+    let usr = new User(req.body, false)
     usr.register().then(function(p) {
         req.session.user = {uname: usr.data.uname, gravatar: usr.gravatar, _id: usr.data._id}
         req.session.save(function() {

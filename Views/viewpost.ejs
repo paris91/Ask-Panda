@@ -8,8 +8,14 @@
     <body>
         <%- include('includes/header') %>
         <div id="main" class="vertical-centered-flex">
-            <h1><%= post.title %></h1>
-            <p><%= post.content %></p>
+            <div id="post-div">
+                <div id="post-author">
+                    <img src="<%= post.authorInfo.gravatar %>" alt="<%= post.authorInfo.uname %>" class="imgGravatar">
+                    <p><%= post.authorInfo.uname %> , <%= post.createdDate.getDate() %> / <%= post.createdDate.getMonth()+1 %> / <%= post.createdDate.getFullYear() %> </p>
+                </div>                
+                <h1 id="post-title"><%= post.title %></h1>                
+                <p id="post-content"><%= post.content %></p>           
+            </div>
         </div>
     </body>
 </html>
