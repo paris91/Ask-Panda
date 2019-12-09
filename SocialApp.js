@@ -20,7 +20,12 @@ socialapp.use(express.json())
 socialapp.use(express.static('Public'))  // folder
 socialapp.set('views', 'Views')
 socialapp.set('view engine', 'ejs')
-socialapp.use(function(req, res, next) {
+socialapp.use(function(req, res, next) {    
+    if(req.session.user) {
+        req.currentUser = req.session.user._id
+    } else {
+        req.currentUser = 0
+    }
     res.locals.user = req.session.user
     next()
 })

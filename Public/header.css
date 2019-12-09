@@ -110,6 +110,16 @@ button {
     /* box-sizing: content-box; */
 }
 
+a:link {
+    text-decoration: none;
+    color: var(--navbar-color, #eeeeee)
+}
+
+a {
+    text-decoration: none;
+    color: var(--navbar-color, #eeeeee)
+}
+
 #flash-errors {
     display: flex;
     flex-direction: column;

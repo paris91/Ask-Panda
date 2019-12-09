@@ -39,19 +39,43 @@ Post.prototype.createPost = function() {
         this.validate()
         if (!this.errors.length) {
             col_posts.insertOne(this.data).then((postInfo) => {
-                resolve("Post created successfully")
+                resolve("success")
             }).catch(() => {
-                reject("Something went wrong! Unable to create posts")
+                reject("failure")
             })
         }
         else {
-            reject("Post creation failed")
+            reject("failure")
         }
     })
 }
 
+Post.prototype.updatePost = function() {
+    return new Promise((resolve, reject) => {
+        this.errors = []
+        console.log(this.data)
+        console.log(this._id)
+        this.clean()
+        this.validate()
+        if (!this.errors.length) {
+            col_posts.findOneAndUpdate({_id: new ObjectID(this._id)}, {$set: {title: this.data.title, content: this.data.content}}).then((p) => {
+                resolve("success")
+            }).catch(() => {
+                resolve("failure")
+            })
+        } 
+        else {
+            reject("failure")
+        }       
+    })
+}
+
+Post.removePost = function(id) {
+
+}
+
 // NOT A PROTOTYPE
-Post.findPostByID = function(id) {
+Post.findPostByID = function(id, authorid) {
     return new Promise(async function(resolve, reject) {
         if (!((typeof(id) == "string") && (ObjectID.isValid(id)))) {
             reject('Invalid ID')
@@ -72,10 +96,11 @@ Post.findPostByID = function(id) {
         ]).toArray()
 
         pst = pst.map(function(x) {
+            x.isAuthor = (x.authorInfo._id == authorid)                
             x.authorInfo = {
                 uname: x.authorInfo.uname,
-                gravatar: new User(x.authorInfo, true).gravatar
-            }
+                gravatar: new User(x.authorInfo, true).gravatar,                
+            }                        
             return x
         })[0]
         
@@ -110,5 +135,6 @@ Post.findPostsByAuthor = async function(id) {
         }
     })
 }
+
 
 module.exports = Post

@@ -10,15 +10,24 @@
         <%- include('includes/header') %>
         <div id="main" class="vertical-centered-flex">
             <div id="flash-errors">
-                <% errors.forEach( function(msg) { %>
+                <% if (errors) { errors.forEach( function(msg) { %>
                     <div class="flash-error-msg"> <%= msg %> </div>
-                <% }) %>
+                <% }) }%>
             </div>
-            <form id="frmCreatePost" action="/newPost" method="POST" class="vertical-centered-flex">
-                <input type="text" name="title" id="edtTitle" placeholder="Enter a title" autocomplete="false" maxlength="60">
-                <textarea name="content" id="edtContent" form="frmCreatePost" placeholder="Enter post content"></textarea>
-                <button type="submit" id="btnSubmit">Add</button>
-            </form>
+            <% if (isEdit) { %>
+                <form id="frmCreatePost" action="/post/<%= post._id %>/edit" method="POST" class="vertical-centered-flex">
+                    <input type="text" name="title" id="edtTitle" placeholder="Enter a title" autocomplete="false" maxlength="60" value="<%= post.title %>">
+                    <textarea name="content" id="edtContent" form="frmCreatePost" placeholder="Enter post content"><%= post.content %></textarea>
+                    <button type="submit" id="btnSubmit">Save Changes</button>
+                </form>                            
+            <% } else { %>
+                <form id="frmCreatePost" action="/newPost" method="POST" class="vertical-centered-flex">
+                    <input type="text" name="title" id="edtTitle" placeholder="Enter a title" autocomplete="false" maxlength="60">
+                    <textarea name="content" id="edtContent" form="frmCreatePost" placeholder="Enter post content"></textarea>
+                    <button type="submit" id="btnSubmit">Add</button>
+                </form>                            
+            <% } %>                                                
+            
         </div>
     </body>
 </html>

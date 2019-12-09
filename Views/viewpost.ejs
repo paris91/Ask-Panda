@@ -4,16 +4,23 @@
         <title>Ask Panda - <%= post.title %></title>
         <link rel="stylesheet" href="/header.css">
         <link rel="stylesheet" href="/viewpost.css">
+        <script src="https://kit.fontawesome.com/b5a7c37228.js" crossorigin="anonymous"></script>
     </head>
     <body>
         <%- include('includes/header') %>
         <div id="main" class="vertical-centered-flex">
             <div id="post-div">
                 <div id="post-author">
-                    <img src="<%= post.authorInfo.gravatar %>" alt="<%= post.authorInfo.uname %>" class="imgGravatar">
+                    <a href="\profile\<%= post.authorInfo.uname %>"><img src="<%= post.authorInfo.gravatar %>" alt="<%= post.authorInfo.uname %>" class="imgGravatar"></a>
                     <p><%= post.authorInfo.uname %> , <%= post.createdDate.getDate() %> / <%= post.createdDate.getMonth()+1 %> / <%= post.createdDate.getFullYear() %> </p>
                 </div>                
-                <h1 id="post-title"><%= post.title %></h1>                
+                <h1 id="post-title"><%= post.title %></h1>                     
+                <div id="post-controls">
+                    <% if (post.isAuthor) { %>
+                        <a href="\post\<%= post._id %>\edit"><i class="fas fa-pen-square fa-3x"></i></a>
+                        <a href="\post\<%= post._id %>\delete"><i class="fas fa-minus-square fa-3x"></i></a>
+                    <% } %>
+                </div>                           
                 <p id="post-content"><%= post.content %></p>           
             </div>
         </div>

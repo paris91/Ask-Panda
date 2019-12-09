@@ -1,8 +1,8 @@
 #post-div {
     display: grid;
     grid-template-areas:
-        "profile title"
-        "cntnt cntnt";
+        "profile title ctrls"
+        "cntnt cntnt cntnt";
     width: 80vw;
 }
 
@@ -17,6 +17,18 @@
 #post-title {
     grid-area: title;
     font-size: 3.2em;
+}
+
+#post-controls {
+    grid-area: ctrls;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+#post-controls * {
+    padding-right: 5px;
 }
 
 #post-content {
