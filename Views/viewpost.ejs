@@ -9,6 +9,11 @@
     <body>
         <%- include('includes/header') %>
         <div id="main" class="vertical-centered-flex">
+            <div id="flash-errors">
+                <% if (success) { success.forEach( function(msg) { %>
+                    <div class="flash-success-msg"> <%= msg %> </div>
+                <% }) }%>
+            </div>            
             <div id="post-div">
                 <div id="post-author">
                     <a href="\profile\<%= post.authorInfo.uname %>"><img src="<%= post.authorInfo.gravatar %>" alt="<%= post.authorInfo.uname %>" class="imgGravatar"></a>
@@ -21,7 +26,7 @@
                         <a href="\post\<%= post._id %>\delete"><i class="fas fa-minus-square fa-3x"></i></a>
                     <% } %>
                 </div>                           
-                <p id="post-content"><%= post.content %></p>           
+                <div id="post-content"><%- scanUserInput(post.content) %></div>           
             </div>
         </div>
     </body>

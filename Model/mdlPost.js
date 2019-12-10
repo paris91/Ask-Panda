@@ -39,7 +39,7 @@ Post.prototype.createPost = function() {
         this.validate()
         if (!this.errors.length) {
             col_posts.insertOne(this.data).then((postInfo) => {
-                resolve("success")
+                resolve(postInfo.ops[0]._id)
             }).catch(() => {
                 reject("failure")
             })
@@ -53,15 +53,13 @@ Post.prototype.createPost = function() {
 Post.prototype.updatePost = function() {
     return new Promise((resolve, reject) => {
         this.errors = []
-        console.log(this.data)
-        console.log(this._id)
         this.clean()
         this.validate()
         if (!this.errors.length) {
             col_posts.findOneAndUpdate({_id: new ObjectID(this._id)}, {$set: {title: this.data.title, content: this.data.content}}).then((p) => {
                 resolve("success")
             }).catch(() => {
-                resolve("failure")
+                reject("failure")
             })
         } 
         else {
@@ -71,7 +69,13 @@ Post.prototype.updatePost = function() {
 }
 
 Post.removePost = function(id) {
-
+    return new Promise((resolve, reject) => {
+        col_posts.deleteOne({_id: new ObjectID(id)}).then(() => {
+            resolve("success")
+        }).catch(()=> {
+            reject("failure")
+        })
+    })
 }
 
 // NOT A PROTOTYPE

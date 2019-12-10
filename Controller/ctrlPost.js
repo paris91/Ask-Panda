@@ -7,8 +7,9 @@ exports.createPost = function(req, res) {
 
 exports.newPost = function(req, res) {
     let pst = new Post(req.body, req.currentUser)
-    pst.createPost().then(function(p) {
-        res.redirect('/')
+    pst.createPost().then(function(id) {
+        req.flash('success', "Post created successfully.")
+        res.redirect(`/post/${id}`)
     }).catch(function(p) {
         req.flash('errors', pst.errors)
         res.render('post', {errors: req.flash('errors'), isEdit: false, post: {}})
@@ -18,7 +19,7 @@ exports.newPost = function(req, res) {
 exports.viewPost = async function(req, res) {
     try {        
         let pst = await Post.findPostByID(req.params.id, req.currentUser)
-        res.render('viewpost', {post: pst})
+        res.render('viewpost', {success: req.flash('success'), post: pst})
     } catch {
         res.render('404')
     }
@@ -39,10 +40,20 @@ exports.editPost = async function(req, res) {
 
 exports.deletePost = async function(req, res) {
     try {
-
+        let pst = await Post.findPostByID(req.params.id, req.currentUser)
+        if(pst.isAuthor) {
+            Post.removePost(req.params.id).then(() => {
+                res.redirect(`/profile/${req.session.user.uname}`)
+            }).catch(function() {
+                res.render('404')
+            })
+        } else {
+            res.render('404')
+        }        
     } catch {
         res.render('404')
     }
+
 }
 
 exports.updatePost = async function(req, res) {
@@ -54,9 +65,5 @@ exports.updatePost = async function(req, res) {
         req.flash('errors', pst.errors)
         res.render('post', {errors: req.flash('errors'), isEdit: true, post: pst})
     })
-
-}
-
-exports.removePost = function(req, res) {
 
 }

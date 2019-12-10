@@ -133,3 +133,10 @@ a {
     width: 40vw;
     margin: 5px;
 }
+
+.flash-success-msg {
+    background: greenyellow;
+    color: black;
+    width: 40vw;
+    margin: 5px;
+}
