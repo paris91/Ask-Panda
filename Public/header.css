@@ -48,10 +48,21 @@ nav {
     background: var(--navbar-color, #eeeeee);
 }
 
+footer {
+    width: 100vw;
+    height: var(--navbar-height, 50px);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    background: var(--home-color, #000000);
+    color: var(--navbar-color, #eeeeee);
+}
+
 #main {
     background: var(--home-color, #000000);
     color: var(--navbar-color, #eeeeee);
-    height: calc(100vh - var(--navbar-height,50px));
+    height: calc(100vh - (2*var(--navbar-height,50px)));
 }
 
 #imgLogo {
@@ -69,9 +80,8 @@ nav {
 
 .imgGravatar {    
     /* box-sizing: content-box; */
-    margin: 6px;
     border-radius: 50%;
-    max-height: var(--navbar-height, 50px);
+    max-height: 35px;
     width: auto;
 }
 
@@ -120,6 +130,21 @@ a {
     color: var(--navbar-color, #eeeeee)
 }
 
+.dark-icon {
+    color: var(--home-color, #000000);
+}
+
+.dark-icon:link {
+    color: var(--home-color, #000000);
+}
+
+#nav-controls-div {
+    display: grid;
+    grid-template-rows: auto;
+    grid-template-columns: repeat(4, 40px);
+    column-gap: 10px;
+}
+
 #flash-errors {
     display: flex;
     flex-direction: column;
@@ -139,4 +164,20 @@ a {
     color: black;
     width: 40vw;
     margin: 5px;
+}
+
+#searchScreenDiv {
+    background: var(--home-color, #000000);
+    color: var(--navbar-color, #eeeeee);
+    height: calc(100vh - (2*var(--navbar-height,50px)));
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#edtSearch {
+    width: 60vw;
+    font-size: 3em;
 }

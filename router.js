@@ -7,7 +7,7 @@ const ctrlPost = require('./Controller/ctrlPost')
 router.get('/', ctrlUser.home)
 router.post('/login', ctrlUser.login)
 router.post('/register', ctrlUser.register)
-router.post('/logout', ctrlUser.logout)
+router.get('/logout', ctrlUser.logout)
 
 router.get('/profile/:uname', ctrlUser.viewProfile)
 router.get('/post/:id', ctrlPost.viewPost)

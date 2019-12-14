@@ -5,16 +5,20 @@
   "main": "db.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon db"
+    "dev": "start nodemon db --ignore Frontend-js --ignore Public && start webpack --watch"
   },
   "keywords": [],
   "author": "Pari S",
   "license": "ISC",
   "dependencies": {
+    "@babel/core": "^7.7.5",
+    "@babel/preset-env": "^7.7.6",
     "axios": "^0.19.0",
+    "babel-loader": "^8.0.6",
     "bcryptjs": "^2.4.3",
     "connect-flash": "^0.1.1",
     "connect-mongo": "^3.1.2",
+    "dompurify": "^2.0.7",
     "dotenv": "^8.2.0",
     "ejs": "^2.7.1",
     "express": "^4.17.1",
@@ -25,7 +29,9 @@
     "mongodb": "^3.3.3",
     "nodemon": "^1.19.4",
     "sanitize-html": "^1.20.1",
-    "validator": "^12.0.0"
+    "validator": "^12.0.0",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10"
   },
   "repository": {
     "type": "git",

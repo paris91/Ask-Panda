@@ -1,16 +1,13 @@
-<nav>
+<nav id="navbar">
     <a href="/"><img src="/askpanda.jpg" alt="ASK PANDA" id="imgLogo"></a>
 
     <% if (user) { %>
         
-    <div id="nav-controls-div" class="horizontal-centered-flex">
+    <div id="nav-controls-div">        
+        <a href=# class="dark-icon" id="searchBtn"><i class="fas fa-search fa-2x"></i></a>        
+        <a href="/createPost" class="dark-icon"><i class="fas fa-plus-square fa-2x"></i></a>
+        <a href="/logout" class="dark-icon"><i class="fas fa-power-off fa-2x"></i></a>
         <a href="/profile/<%= user.uname %>"><img class="imgGravatar" src="<%= user.gravatar %>" alt=""></a>
-        <form action="/createPost" method="GET" id="btnfrmCreatePost">            
-            <button id="btnCreatePost" type="submit">Create Post</button>
-        </form>
-        <form action="/logout" method="POST" id="btnfrmLogout">            
-            <button id="btnLogout" type="submit">Logout</button>
-        </form>
     </div>        
 
     <% } else { %>
