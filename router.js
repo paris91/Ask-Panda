@@ -18,5 +18,7 @@ router.get('/post/:id/delete', ctrlUser.authorizeUser, ctrlPost.deletePost)
 router.post('/newPost', ctrlPost.newPost)
 router.post('/post/:id/edit', ctrlPost.updatePost)
 
+router.post('/search', ctrlPost.searchPosts)
+
 
 module.exports = router

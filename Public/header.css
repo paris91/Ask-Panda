@@ -85,6 +85,12 @@ footer {
     width: auto;
 }
 
+.post-tile {
+    display: grid;
+    grid-template-columns: auto auto;
+    column-gap: 50px;
+}
+
 h1 {
     font-family: 'Nexa-Light';
     font-weight: lighter;

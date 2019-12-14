@@ -140,5 +140,42 @@ Post.findPostsByAuthor = async function(id) {
     })
 }
 
+Post.searchPosts = function(searchText) {
+    return new Promise(async function(resolve, reject) {
+        try {
+            searchText = sanitizeHTML(searchText.trim(), {allowedTags: [], allowedAttributes: []})
+            let psts = await col_posts.aggregate([
+                {$match: {$text: {$search: searchText}}},
+                {$lookup: {from: "users", localField: "author", foreignField: "_id", as: "authorInfo"}},
+                {$sort: {score: {$meta: "textScore"}}},
+                {$unwind: "$authorInfo"},
+                {$project: {
+                    title: 1,
+                    content: 1,
+                    createdDate: 1,
+                    authorInfo: 1
+                }}                  
+            ]).toArray()
+
+            psts = psts.map(function(x) {              
+                x.authorInfo = {
+                    uname: x.authorInfo.uname,
+                    gravatar: new User(x.authorInfo, true).gravatar,                
+                }                        
+                return x
+            })            
+    
+            if(psts) {                
+                resolve(psts)
+            } else {
+                reject("empty")
+            }
+        } catch {
+            reject("failure")
+        }
+
+    })
+}
+
 
 module.exports = Post

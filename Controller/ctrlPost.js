@@ -67,3 +67,11 @@ exports.updatePost = async function(req, res) {
     })
 
 }
+
+exports.searchPosts = function(req, res) {
+    Post.searchPosts(req.body.searchText).then((response) => {
+        res.send(response)
+    }).catch(function() {
+        res.send([])
+    })
+}
