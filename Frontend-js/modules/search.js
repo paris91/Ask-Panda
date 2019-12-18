@@ -2,20 +2,18 @@ import axios from "axios"
 
 export default class Search {
     constructor() {
-        if (document.getElementById("searchBtn") != undefined) {
-            this.mainDiv = document.getElementById("main")
-            this.navbar = document.getElementById("navbar")        
-            this.createSearchScreen()
-            this.searchBtn = document.getElementById("searchBtn")  
-            this.searchScreenDiv = document.getElementById("searchScreenDiv")  
-            this.closeSearchBtn = document.getElementById("closeSearchBtn")        
-            this.edtSearch = document.getElementById("edtSearch")  
-            this.searchResultsDiv = document.getElementById("searchResultsDiv")
-            this.searchForm = document.getElementById("searchForm")
-            this.waiter 
-            this.events()
-            this.toggleSearchScreen(true)
-        }
+        this.mainDiv = document.getElementById("main")
+        this.navbar = document.getElementById("navbar")        
+        this.createSearchScreen()
+        this.searchBtn = document.getElementById("searchBtn")  
+        this.searchScreenDiv = document.getElementById("searchScreenDiv")  
+        this.closeSearchBtn = document.getElementById("closeSearchBtn")        
+        this.edtSearch = document.getElementById("edtSearch")  
+        this.searchResultsDiv = document.getElementById("searchResultsDiv")
+        this.searchForm = document.getElementById("searchForm")
+        this.waiter 
+        this.events()
+        this.toggleSearchScreen(true)
     }   
     
     createSearchScreen() {

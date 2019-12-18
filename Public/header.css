@@ -51,12 +51,12 @@ nav {
 footer {
     width: 100vw;
     height: var(--navbar-height, 50px);
+    background: var(--home-color, #000000);
+    color: var(--navbar-color, #eeeeee);
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-around;
-    background: var(--home-color, #000000);
-    color: var(--navbar-color, #eeeeee);
+    justify-content: space-around;    
 }
 
 #main {
@@ -186,4 +186,46 @@ a {
 #edtSearch {
     width: 60vw;
     font-size: 3em;
+}
+
+#chat {
+    position: absolute;
+    bottom: 0;
+    right: 20px;    
+    width: 250px;
+    background: var(--navbar-color, #eeeeee); 
+    color: #000000;
+}
+
+#chat-header {
+    /* background: var(--navbar-color, #eeeeee);     */
+    /* color: #000000; */
+    height: 30px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10px 0 10px;
+}
+
+#chat-head {
+    width: 100%
+}
+
+#chat-body {
+    height: 300px;
+    background: var(--home-color, #000000);
+}
+
+#chat-ctrl {
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background: var(--home-color, #000000);    
+}
+
+#edtChat {
+    width: 100%
 }

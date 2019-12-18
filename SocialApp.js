@@ -37,5 +37,10 @@ socialapp.use(function(req, res, next) {
 })
 socialapp.use('/', router)
 
+const server = require("http").createServer(socialapp)
+const io = require("socket.io")(server)
+io.on('connection', () => {
 
-module.exports = socialapp
+})
+
+module.exports = server

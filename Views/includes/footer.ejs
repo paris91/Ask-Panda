@@ -1,4 +1,21 @@
 <footer>
-    <script src="/main-bundled.js"></script>
     <p>Copyright (c) 1991 Pari S</p>
+    <% if (user) { %>
+    <div id="chat">        
+        <div id="chat-header">
+            <div id="chat-head"><p><b> Chat</b></p></div>
+            <div><a id="close-chat" class="dark-icon" href="#"><i class="fas fa-times-circle"></i></a></div>
+        </div>
+        <div id="chat-body">
+
+        </div>
+        <div id="chat-ctrl">
+            <form action="submit" method="POST" id="frmChat" name="frmChat">
+                <input id="edtChat" type="text" placeholder="Type a message.." name="MessageText" autocomplete="off"/>
+            </form>
+        </div>
+    </div>
+    <% } %>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/main-bundled.js"></script>    
 </footer>
