@@ -39,8 +39,17 @@ socialapp.use('/', router)
 
 const server = require("http").createServer(socialapp)
 const io = require("socket.io")(server)
-io.on('connection', () => {
+io.use(function(socket, next) {
+    session(socket.request, socket.request.res, next)
+})
 
+io.on('connection', function(socket) {
+    if(socket.request.session.user)
+    socket.emit('init', {uname: socket.request.session.user.uname, gravatar: socket.request.session.user.gravatar})
+
+    socket.on('sendToAll', function(data) {
+        socket.broadcast.emit('msgToAll', {msg: sanitizeHTML(data.msg, {allowedTags: [], allowedAttributes: []}), uname: data.uname, gravatar: data.gravatar})
+    })
 })
 
 module.exports = server
