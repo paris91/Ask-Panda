@@ -41,11 +41,11 @@ Post.prototype.createPost = function() {
             col_posts.insertOne(this.data).then((postInfo) => {
                 resolve(postInfo.ops[0]._id)
             }).catch(() => {
-                reject("failure")
+                reject("error")
             })
         }
         else {
-            reject("failure")
+            reject("fail")
         }
     })
 }
@@ -59,11 +59,11 @@ Post.prototype.updatePost = function() {
             col_posts.findOneAndUpdate({_id: new ObjectID(this._id)}, {$set: {title: this.data.title, content: this.data.content}}).then((p) => {
                 resolve("success")
             }).catch(() => {
-                reject("failure")
+                reject("error")
             })
         } 
         else {
-            reject("failure")
+            reject("fail")
         }       
     })
 }
@@ -73,7 +73,7 @@ Post.removePost = function(id) {
         col_posts.deleteOne({_id: new ObjectID(id)}).then(() => {
             resolve("success")
         }).catch(()=> {
-            reject("failure")
+            reject("fail")
         })
     })
 }
@@ -112,7 +112,7 @@ Post.findPostByID = function(id, authorid) {
             resolve(pst)
         }
         else {
-            reject('Unable to find post')
+            reject('nil')
         }
 
     })
@@ -135,7 +135,7 @@ Post.findPostsByAuthor = async function(id) {
         if(psts) {
             resolve(psts)
         } else {
-            reject()
+            reject('nil')
         }
     })
 }
@@ -168,10 +168,10 @@ Post.searchPosts = function(searchText) {
             if(psts) {                
                 resolve(psts)
             } else {
-                reject("empty")
+                reject("nil")
             }
         } catch {
-            reject("failure")
+            reject("error")
         }
 
     })

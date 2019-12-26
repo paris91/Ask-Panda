@@ -3,7 +3,6 @@ const validator = require("validator")
 const sanitizeHTML = require("sanitize-html")
 const bcrypt = require("bcryptjs")
 const md5 = require("md5")
-// const Post = require("./mdlPost")
 
 let User = function(data, fetchAvatar) {
     this.data = data
@@ -63,13 +62,13 @@ User.prototype.register = function() {
             col_users.insertOne(this.data).then((userInfo) => {
                 this.getAvatar()
                 this.data.id = userInfo._id
-                resolve("register success")
+                resolve("success")
             }).catch(() => {
-                reject("register fail")
+                reject("error")
             })
         }
         else {
-            reject("register fail")
+            reject("fail")
         }
     })
 }
@@ -82,13 +81,13 @@ User.prototype.login = function() {
                 this.data.email = userInfo.email
                 this.data._id = userInfo._id
                 this.getAvatar()
-                resolve("login success")
+                resolve("success")
             }
             else {
-                reject("login fail")
+                reject("fail")
             }
         }).catch(() => {
-            reject("error occured on login")
+            reject("error")
         })
     })
 }
@@ -102,11 +101,10 @@ User.findProfileByUname = async function(u) {
         let prf = await col_users.findOne({uname: u})
         if (prf) {
             let usr = new User(prf, true)
-            // let psts = await Post.findPostsByAuthor(prf._id)
             prf = {uname: usr.data.uname, email: usr.data.email, gravatar: usr.gravatar, authorid: usr.data._id}
             resolve(prf)
         } else {
-            reject()
+            reject('nil')
         }
     })
 
