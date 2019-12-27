@@ -1,1 +1,1 @@
-web: node SocialApp.js
+web: node db.js
