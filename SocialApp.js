@@ -5,6 +5,7 @@ const flash = require("connect-flash")
 const router = require("./router")
 const markdown = require("marked")
 const sanitizeHTML = require("sanitize-html")
+const csrf = require("csurf")
 
 let session = expressSession({
     secret: "Pari is developing this app to learn some JS",
@@ -22,8 +23,10 @@ socialapp.use(express.json())
 socialapp.use(express.static('Public'))  // folder
 socialapp.set('views', 'Views')
 socialapp.set('view engine', 'ejs')
+socialapp.use(csrf())
 
-socialapp.use(function(req, res, next) {    
+socialapp.use(function(req, res, next) { 
+    res.locals.csrfToken = req.csrfToken()   
     if(req.session.user) {
         req.currentUser = req.session.user._id
     } else {
@@ -35,7 +38,21 @@ socialapp.use(function(req, res, next) {
     }
     next()
 })
+
 socialapp.use('/', router)
+
+socialapp.use(function(err, req, res, next) {
+    if (err) {
+        if (err.code == "EBADCSRFTOKEN") {
+            req.flash('errors', 'Cross Site Forgery Detected!')
+            req.session.save(function() {
+                res.redirect('/')
+            })
+        } else {
+            res.render("404")
+        }
+    }
+})
 
 const server = require("http").createServer(socialapp)
 const io = require("socket.io")(server)

@@ -15,8 +15,11 @@
     <form action="/login" method="POST" id="frmLogin" class="horizontal-centered-flex">
         <input type="text" maxlength="10" id="edtloginname" name="uname" autocomplete="off" placeholder="username" />
         <input type="password" maxlength="15" id="edtloginpswd" name="pswd" autocomplete="off" placeholder="password" />
-        <button id="btnLogin" type="submit">LOGIN</button>
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        <button id="btnLogin" type="submit">LOGIN</button>        
     </form>
 
     <% } %>
+
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>" id="_csrf">
 </nav>

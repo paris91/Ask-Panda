@@ -47,7 +47,7 @@ export default class Search {
     }
 
     doSearch() {
-        axios.post('/search', {searchText: this.edtSearch.value}).then((response) => {
+        axios.post('/search', {searchText: this.edtSearch.value, _csrf: document.getElementById('_csrf').value}).then((response) => {
             this.searchResultsDiv.innerHTML = ""
             if(response.data) {                                        
                 if (response.data.length) {
@@ -61,7 +61,7 @@ export default class Search {
                         `)                            
                     })
                 } else {
-                    this.searchResultsDiv.insertAdjacentHTML('afterbegin', '<h1>No results found 1</h1>')
+                    this.searchResultsDiv.insertAdjacentHTML('afterbegin', '<h1>No results found</h1>')
                 }
 
             }

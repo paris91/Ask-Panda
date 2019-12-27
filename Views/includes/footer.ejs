@@ -12,6 +12,7 @@
             <div id="chat-ctrl">
                 <form action="" method="POST" id="frmChat" name="frmChat">
                     <input id="edtChat" type="text" placeholder="Type a message.." name="MessageText" autocomplete="off"/>
+                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                 </form>
             </div>
         </div>

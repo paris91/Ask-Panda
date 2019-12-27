@@ -19,12 +19,14 @@
                 <form id="frmCreatePost" action="/post/<%= post._id %>/edit" method="POST" class="vertical-centered-flex">
                     <input type="text" name="title" id="edtTitle" placeholder="Enter a title" autocomplete="false" maxlength="60" value="<%= post.title %>">
                     <textarea name="content" id="edtContent" form="frmCreatePost" placeholder="Enter post content"><%= post.content %></textarea>
+                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                     <button type="submit" id="btnSubmit">Save Changes</button>
                 </form>                            
             <% } else { %>
                 <form id="frmCreatePost" action="/newPost" method="POST" class="vertical-centered-flex">
                     <input type="text" name="title" id="edtTitle" placeholder="Enter a title" autocomplete="false" maxlength="60">
                     <textarea name="content" id="edtContent" form="frmCreatePost" placeholder="Enter post content"></textarea>
+                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                     <button type="submit" id="btnSubmit">Add</button>
                 </form>                            
             <% } %>                                                

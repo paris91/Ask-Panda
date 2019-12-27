@@ -15,13 +15,11 @@ exports.login = function(req, res) {
     usr.login().then(function(p) {
         req.session.user = {uname: usr.data.uname, gravatar: usr.gravatar, _id: usr.data._id}
         req.session.save(function() {
-            // res.send({redirect: '/'})
             res.redirect('/')
         })
     }).catch(function(p) {
         req.flash('errors', usr.errors)
         req.session.save(function() {
-            // res.send({redirect: '/'})
             res.redirect('/')
         })
     })
@@ -33,8 +31,9 @@ exports.authorizeUser = function(req, res, next) {
     }
     else {
         req.flash('errors', 'Login required!')
-        req.session.save()
-        res.redirect('/')
+        req.session.save(function() {
+            res.redirect('/')
+        })
     }
 }
 
